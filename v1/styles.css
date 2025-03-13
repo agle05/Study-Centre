@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&display=swap');
+* {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 40px;
+    color: white;
+    background-color: rgba(17,78,145,255);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.header button h1 {
+    font-size: 20px;
+    padding-top: 6px;
+}
+.header li {
+    list-style-type: none;
+    display: inline-block;
+    margin-left: 30px;
+}
+.header li button {
+    appearance: none;
+    border: none;
+    background: none;
+    outline:none;
+    cursor: pointer;
+    color: white;
+}
+.header li button :hover {
+    text-decoration: underline;
+}
+section {
+    display: -webkit-flex;
+    display: flex;
+  }
+nav {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 92.5vh;
+    background: rgba(14,62,125,255);
+    border-color: rgba(14,62,125,255);
+    display: flex;
+    justify-content: space-between;
+    padding-top: 50px;
+}
+nav h2 {
+    color: white;
+    padding-left: 15%;
+    font-size: 30px;
+    padding-top: 5px;
+}
+article {
+    -webkit-flex: 5;
+    -ms-flex: 5;
+    flex: 5;
+    background-color: white;
+    border-color: white;
+}
+.home-button {
+    -webkit-flex: 5;
+    -ms-flex: 5;
+    flex: 5;
+}
+.triangle-left {
+	width: 0;
+	height: 0;
+	border-top: 30px solid transparent;
+	border-right: 30px solid white;
+	border-bottom: 30px solid transparent;
+}
+article h3 {
+    font-size: 58px;
+    color: black;
+    padding-top: 40%;
+    padding-left: 23%;
+}
+article h2 {
+    padding-left: 23%;
+    font-size: 84px;
+}
+article button {
+    margin-top: 15px;
+    margin-left: 37%;
+    height: 50px;
+    width: 220px;
+    border-color: rgba(17,78,145,255);
+    border-width: 4px;
+    border-radius: 5px;
+    background-color: white;
+    transition-duration: 0.3s;
+    font-size: 20px;
+    font-weight: bold;
+}
+article button:hover {
+    transform: scale(1.1, 1.1);
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+.home-button {
+    padding-top: 15%;
+}
+.home-button .top {
+    display: flex;
+    justify-content: center;
+}
+.home-button .top button {
+    width: 175px;
+    height: 175px;
+}
+.home-button .top .home {
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+.home-button .bottom .book {
+    margin-right: 50px;
+}
+.home-button .bottom {
+    display: flex;
+    justify-content: center;
+}
+.home-button .bottom button {
+    width: 175px;
+    height: 175px;
+}
+.home-button button {
+    border-width: 0.05px;
+    border-radius: 15px;
+    font-size: 30px;
+    background-color: white;
+    transition-duration: 0.3s;
+}
+.home-button button:hover {
+    transform: scale(1.1, 1.1);
+    transition-duration: 0.3s;
+    cursor: pointer;
+}

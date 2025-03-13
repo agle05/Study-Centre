@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/stylesheet.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Admin | Sacred Heart College</title>
+</head>
+<body>
+    <div class="header">
+        <div class="headtext">
+            <p class="title">Sacred Heart College</p>
+            <p class="city">AUCKLAND</p>
+        </div>
+        <button id="quickLinks"><p>Quick Links</p><h3>&darr;</h3></button>
+        <button id="login-btn" onclick="location.href='/login'"><p>Log in</p><h3>&rarr;</h3></button>
+    </div>
+    <div class="third-bar">
+        <div class="dark-blue"></div>
+        <div class="red"></div>
+        <div class="light-blue"></div>
+        <div class="dark-blue1"></div>
+    </div>
+    <div id="menu-bar">
+        <div id="mySidenav" class="sidenav">
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/tutors">Tutor Team</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a href="/project-info">Project Info</a>
+            <a href="https://www.sacredheart.school.nz/contact-us">Contact Us</a>
+        </div>
+    </div>
+    <div class="admin-form">
+        <h1>Student List Input</h1>
+  
+        <form id="studentForm" action="/admin" method="POST">
+            <label>Student names:</label><br>
+            <input type="text" name="student1"><br>
+            <input type="text" name="student2"><br>
+            <input type="text" name="student3">
+            <input type="submit" value="Enter">
+        </form>
+
+        <button onclick="addInputField()" id="addStudentBtn">Add Student</button>
+    </div>
+    <div>
+      <form action="/admin" method="POST" id="selectStudent">
+        <h1>Select student:</h1>
+        <label for="username">Student username:</label>
+        <input type="text" name="username">
+        <input type="submit" name="search" value="Search">
+      </form>
+      
+    </div>
+  
+  <script>
+    var form = document.getElementById('studentForm')
+    form.addEventListener("submit", function(event) {
+      alert('Tutors Added')
+    })
+    var studentCount = 3;
+    var maxStudents = 30;
+
+    function addInputField() {
+      if (studentCount >= maxStudents) {
+        return; // Return early if the maximum number of students is reached
+      }
+      // Create a new input element
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "student" + (++studentCount); // Generate a unique name
+      
+      // Create a line break element for spacing
+      var lineBreak = document.createElement("br");
+      
+      // Append the label, input element, and line break to the container
+      
+      container.appendChild(input);
+      container.appendChild(lineBreak);
+      
+      // Set focus on the newly created input field
+      input.focus();
+    }
+
+    function handleKeyPress(event) {
+      // Check if the Enter key is pressed
+      if (event.keyCode === 13) {
+        event.preventDefault(); // Prevent form submission
+        addInputField();
+      }
+    }
+
+    // Listen for keydown events on the form
+    document.addEventListener('keydown', handleKeyPress);
+
+    // Listen for keydown events on the form
+    document.addEventListener('keydown', handleKeyPress);
+
+    var isOpen = false;
+    var menu = document.getElementById("mySidenav");
+    var openButton = document.getElementById("quickLinks");
+
+    function toggleNav() {
+    if (isOpen) {
+        menu.classList.remove("open");
+        isOpen = false;
+    } else {
+        menu.classList.add("open");
+        isOpen = true;
+    }
+    }
+
+    openButton.addEventListener("click", toggleNav);
+  </script>
+</body>
+</html>

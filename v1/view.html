@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .zero {
+            background-color: rgb(80, 255, 80);
+            color: rgb(80,255,80);
+        }
+
+        .one {
+            background-color: rgb(255, 68, 68);
+            color: rgb(255, 68, 68);
+        }
+    </style>
+</head>
+<body>
+    <form action="/view" method="post">
+        <label for="tutor">Tutor:</label>
+        <select name="tutor" id="tutor">
+            {% for option in options %}
+                <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select><br>
+        <br><input type="submit">
+    </form>
+    {% if rows %}
+    <br><table>
+        <thead>
+            <tr>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <!-- Add more table header columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td {% if row[0] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[0] }}</td>
+                <td {% if row[1] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[1] }}</td>
+                <td {% if row[2] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[2] }}</td>
+                <td {% if row[3] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[3] }}</td>
+                <td {% if row[4] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[4] }}</td>
+                <!-- Add more table cells as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

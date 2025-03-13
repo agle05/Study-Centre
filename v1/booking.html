@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/stylesheet.css')}}">
+    <title>Booking</title>
+</head>
+<body>
+    <h2>{{ month }}/{{ year }}</h2>
+    <div>
+        {{ calendar|safe }}
+    </div>
+    {% if message %}
+        <a style="text-decoration: None; text-align: center;"href="/book"><p>{{ message }}</p></a><br>
+    {% endif %}
+    <table class="calendar">
+        <thead>
+            <tr>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for week in calendar_weeks %}
+            <tr>
+                {% for day in week %}
+                <td>
+                    <span class="day">{{ day.day }}</span>
+                    {% for event in day.events %}
+                    <div class="event">{{ event.title }}</div>
+                    {% endfor %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form action="/book" method="POST" autocomplete="off" class="book-form">
+        <br><label for="date">Date:</label>
+        <input type="date" name="date" id="date"><br>
+        <label for="time">Start time:</label>
+        <input type="time" name="start-time" id="start-time"><br>
+        <label for="time">End time:</label>
+        <input type="time" name="end-time" id="end-time"><br>
+        <label for="tutor">Tutor:</label>
+        <select name="tutor" id="tutor">
+            <option value="blank">Select a tutor:</option>
+            <option value="Anthony">Anthony</option>
+            <option value="Nathaniel">Nathaniel</option>
+            <option value="Cole">Cole</option>
+            <option value="Joseph">Joseph</option>
+            <option value="Finn">Finn</option>
+        </select><br>
+        <label for="subjects">Subject:</label>
+        <select name="subjects" id="subjects">
+            <option value="blank">Select a subject:</option>
+            <option value="stats">Stats</option>
+            <option value="english">English</option>
+            <option value="biology">Biology</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="calculus">Calculus</option>
+        </select>
+        <input type="submit" name="submit" id="submit" value="Book">
+    </form>
+</body>
+</html>
+<style>
+    h1 {
+        text-align: center;
+    }
+    h2 {
+        text-align: center;
+    }
+    table {
+        width: 50%;
+        border-collapse: collapse;
+    }
+    th {
+        background-color: #ccc;
+        text-align: center;
+        padding: 10px;
+    }
+    td {
+        text-align: center;
+        padding: 10px;
+    }
+    td.today {
+        background-color: #f0f0f0;
+    }
+    td:not(.other-month):hover {
+        background-color: #e0e0e0;
+        cursor: pointer;
+    }
+    td.other-month {
+        color: #999;
+    }
+    .prev-month,
+    .next-month {
+        color: #999;
+    }
+    td:empty:not(:has(*)) {
+        background-color: transparent;
+        pointer-events: none;
+    }
+    td:not(.other-month):not(td:empty):hover {
+        background-color: #999;
+        cursor: pointer;
+    }
+</style>
+

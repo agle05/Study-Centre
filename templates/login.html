@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/stylesheet.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Login | Sacred Heart College</title>
+</head>
+<body>
+    <div class="header">
+        <div class="headtext">
+            <p class="title">Sacred Heart College</p>
+            <p class="city">AUCKLAND</p>
+        </div>
+        <button id="quickLinks"><p>Quick Links</p><h3>&darr;</h3></button>
+        <button id="login-btn" onclick="location.href='/login'"><p>Log in</p><h3>&rarr;</h3></button>
+    </div>
+    <div class="third-bar">
+        <div class="dark-blue"></div>
+        <div class="red"></div>
+        <div class="light-blue"></div>
+        <div class="dark-blue1"></div>
+    </div>
+    <div id="menu-bar">
+        <div id="mySidenav" class="sidenav">
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/tutors">Tutor Team</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a href="/project-info">Project Info</a>
+            <a href="https://www.sacredheart.school.nz/contact-us">Contact Us</a>
+        </div>
+    </div>
+    <div class="login-section">
+        <form action="/login" method="post" autocomplete="off" class="login-form">
+            <h1>Log in</h1><br>
+            <p>New to study centre? <a href="/register">Register now</a></p><br>
+            <label for="username">Username <p>(Student ID)</p></label><br>
+            <input type="text" name="username" class="username"><br>
+            {% if error2 %}
+                <p class="error_message">{{error1}}</p>
+            {% endif %}
+            <label for="password">Password</label><br>
+            <input type="password" name="password" class="password"><br>
+            {% if error1 %}
+                <p class="error_message">{{error1}}</p>
+            {% endif %}
+            <a href="/password-reset">Forgotten password?</a><br>
+            <button type="submit" name="login" class="login-btn"><p>Log in</p><span class="material-symbols-outlined">arrow_forward</span></button>
+        </form>
+    </div>
+</body>
+<script>
+    var isOpen = false;
+    var menu = document.getElementById("mySidenav");
+    var openButton = document.getElementById("quickLinks");
+
+    function toggleNav() {
+    if (isOpen) {
+        menu.classList.remove("open");
+        isOpen = false;
+    } else {
+        menu.classList.add("open");
+        isOpen = true;
+    }
+    }
+
+    openButton.addEventListener("click", toggleNav);
+</script>
+<style>
+    .material-symbols-outlined {
+        color: red;
+        padding-right: 5px;
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 48
+    }
+</style>
+</html>

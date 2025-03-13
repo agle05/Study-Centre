@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/styles.css')}}">
+    <title>Tutor Plus - SHC</title>
+</head>
+<body>
+    <div class="header">
+        <div class="images">
+            <img src="static/SHC_Crest.jpg" width="35px" height="40px">
+            <img src="static/Logo.png" width="155px" height="40px">
+        </div>
+        <ul>
+            <li><a href="/"><button><h1>Home</h1></button></a></li>
+            <li><a href="/subjects"><button><h1>Subjects</h1></button></a></li>
+            <li><a href="/book"><button><h1>Book</h1></button></a></li>
+            <li><a href="/signin"><button><h1>Sign In</h1></button></a></li>
+        </ul>
+    </div>
+    <section>
+        <nav>
+            <h2>Home</h2>
+            <div class="triangle-left"></div>
+        </nav>
+        <article>
+            <h3>Leading students</h3>
+            <h2>to SUCCESS</h2>
+            <button>Find your tutor now!</button>
+        </article>
+        <div class="home-button">
+            <div class="top">
+                <button class="home">Home</button>
+                <button class="tutors">Tutors</button>
+            </div>
+            <div class="bottom">   
+                <button class="book">Book</button>
+                <button class="subjects">Subjects</button>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

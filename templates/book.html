@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/stylesheet.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Booking | Sacred Heart College</title>
+</head>
+<body>
+    <div class="header">
+        <div class="headtext">
+            <p class="title">Sacred Heart College</p>
+            <p class="city">AUCKLAND</p>
+        </div>
+        <button id="quickLinks"><p>Quick Links</p><h3>&darr;</h3></button>
+        <button id="login-btn" onclick="location.href='/logout'"><p>Log out</p><h3>&rarr;</h3></button>
+    </div>
+    <div class="third-bar">
+        <div class="dark-blue"></div>
+        <div class="red"></div>
+        <div class="light-blue"></div>
+        <div class="dark-blue1"></div>
+    </div>
+    <div id="menu-bar">
+        <div id="mySidenav" class="sidenav">
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/tutors">Tutor Team</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a href="/project-info">Project Info</a>
+            <a href="https://www.sacredheart.school.nz/contact-us">Contact Us</a>
+        </div>
+    </div>
+
+    <div class="page_content">
+        <div class="form">
+            <form action="/book" method="post" class="book-form">
+                <h1>Make a booking</h1>
+                <p>Fill out the form below</p><br>
+
+                <label for="tutorName">Tutor</label><br>
+                <select name="tutor" id="tutor">
+                    {% for option in options %}
+                        <option value="{{ option }}">{{ option }}</option>
+                    {% endfor %}
+                </select><br>
+
+                {% if unavailable %}
+                    <p style="color: red;">{{ unavailable }}</p>
+                {% endif %}
+
+                <br><label for="day">Day</label><br>
+                <select name="day" id="day">
+                    <option value="blank"></option>
+                    <option value="monday">Monday</option>
+                    <option value="tuesday">Tuesday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thursday</option>
+                    <option value="friday">Friday</option>
+                </select><br>
+
+                {% if message %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endif %}
+                {% if double %}
+                    <p style="color: red;">{{ double }}</p>
+                {% endif %}
+                {% if triple %}
+                    <p style="color: red;">{{ triple }}</p>
+                {% endif %}
+                {% if triple1 %}
+                    <p style="color: red;">{{triple1}}</p>
+                {% endif %}
+                {% if invalid %}
+                    <p style="color: red;">{{ invalid }}</p>
+                {% endif %}
+                {% if invalid1 %}
+                    <p style="color: red;">{{ invalid1 }}</p>
+                {% endif %}
+                {% if invalid2 %}
+                    <p style="color: red;">{{ invalid2 }}</p>
+                {% endif %}
+
+                <br><label for="time">Time Slot</label><br>
+                <div class="radio">
+                    <div><input type="radio" name="time" value="15">15 mins</input></div>
+                    <div><input type="radio" name="time" value="30">30 mins</input></div>
+                    <div><input type="radio" name="time" value="45">45 mins</input><br></div>
+                </div>
+
+                <br><label for="startTime">Start time</label><br>
+                <select name="startTime" id="startTime">
+                    <option value="blank"></option>
+                    <option value="1">3:15</option>
+                    <option value="2">3:30</option>
+                    <option value="3">3:45</option>
+                    <option value="4">4:00</option>
+                    <option value="5">4:15</option>
+                </select><br>
+
+                <br><button type="submit" name="action" value="Query Booking" onclick="confirmBooking()"><p>Book</p><span class="material-symbols-outlined">arrow_forward</span></button><br>
+            </form>
+        </div>
+        <div class="calendar">
+            <div class="table-content">
+                {% if rows %}
+                    <h2>{{ tutor_name }}'s Schedule</h2> 
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in rows %}
+                            <tr>
+                                <td {% if row[0] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[0] }}</td>
+                                <td {% if row[1] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[1] }}</td>
+                                <td {% if row[2] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[2] }}</td>
+                                <td {% if row[3] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[3] }}</td>
+                                <td {% if row[4] == 0 %}class="zero"{% else %}class="one"{% endif %}>{{ row[4] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+            <form action="/book" method="post" class="switch">
+                <button type="submit" name="left" value="left" id="left"><span class="material-symbols-outlined">arrow_back</span><p>Left</p></button>
+                <p>Switch Between schedules</p>
+                <button type="submit" name="right" value="right" id="right"><p>Right</p><span class="material-symbols-outlined">arrow_forward</span></button>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    //for the menu that opens on the left
+    var isOpen = false;
+    var menu = document.getElementById("mySidenav");
+    var openButton = document.getElementById("quickLinks");
+
+    function toggleNav() {
+    if (isOpen) {
+        menu.classList.remove("open");
+        isOpen = false;
+    } else {
+        menu.classList.add("open");
+        isOpen = true;
+    }
+    }
+
+    openButton.addEventListener("click", toggleNav);
+
+    //script to confirm session booking
+    function confirmBooking() {
+      var confirmation = confirm("Are you sure you want to book?");
+
+      if (confirmation) {
+        // Code to handle booking confirmation
+        alert("Booking confirmed!");
+      } else {
+        // Code to handle booking cancellation
+        alert("Booking canceled!");
+      }
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+        color: red;
+        padding-right: 5px;
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 48
+    }
+    .error {
+        color: red;
+    }
+</style>
+</html>
